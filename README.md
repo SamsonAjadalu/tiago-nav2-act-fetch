@@ -1,6 +1,6 @@
-# TIAGo Isaac Sim / LeRobot (demo slice)
+# Long-Horizon Mobile Manipulation in Isaac Sim
 
-This branch is a **minimal tree** for Isaac Sim ACT inference, NPZ teleop recording, and LeRobot dataset conversion and training. It is intended for external review and handoff; the full upstream project may include additional packages (Isaac Lab extension, ROS 2 workspaces, and assets not listed here).
+This repository implements a long-horizon mobile manipulation workflow for the PAL Robotics TIAGo in NVIDIA Isaac Sim. ROS 2 Nav2 handles room-scale navigation, while LeRobot ACT provides visuomotor control for local approach and grasping.
 
 ## License
 
@@ -14,12 +14,14 @@ This software is licensed under the **GNU Affero General Public License v3.0**. 
 | [extra/isaacsim/](extra/isaacsim/) | Bash launchers, Python entrypoints, and [extra/isaacsim/scripts/tiago_repo_paths.py](extra/isaacsim/scripts/tiago_repo_paths.py) for repository-relative defaults |
 | [extra/lerobot/](extra/lerobot/) | NPZ → LeRobot conversion scripts and training config |
 | [tiago_urdf/](tiago_urdf/) | URDF and meshes referenced by Lula |
+| [ros2_ws/](ros2_ws/) | Nav2 bringup, maps, MoveIt2 / RViz helpers (build with `colcon`; see [ros2_ws/README.md](ros2_ws/README.md)) |
 
 ## Prerequisites
 
 - **NVIDIA Isaac Sim** (version compatible with the APIs used in `extra/isaacsim/scripts/`)
 - **LeRobot** and **PyTorch** available to the same Python used for ACT scripts (often Isaac Sim’s `python.sh`; optional setup notes live under `extra/isaacsim/`)
-- **Scene USD files** are not committed (see `.gitignore`). Place assets under `<repository>/usd/` or set `TIAGO_USD_DIR`, `TIAGO_HOUSE_USD_PATH`, and related variables described in `tiago_repo_paths.py`.
+- **Scene assets:** Place scene files under `<repository>/usd/` or configure `TIAGO_USD_DIR`, `TIAGO_HOUSE_USD_PATH`, and the related variables described in `tiago_repo_paths.py`.
+- **ROS 2 Humble** and **Nav2** stack (`nav2_bringup` and dependencies from `ros2_ws/src/*/package.xml`). Build and run instructions: [ros2_ws/README.md](ros2_ws/README.md).
 
 Optional: add `extra/local_paths.sh` defining `ISAACSIM_ROOT`; several launchers source it when the file exists.
 
@@ -32,8 +34,4 @@ Optional: add `extra/local_paths.sh` defining `ISAACSIM_ROOT`; several launchers
 | `TIAGO_ACT_POLICY_DIR` | Directory containing LeRobot `config.json` and `model.safetensors` |
 | `ISAACSIM_ROOT` | Isaac Sim installation root (used by launchers with `python.sh`) |
 
-Further detail: [extra/isaacsim/COMMANDS.md](extra/isaacsim/COMMANDS.md).
-
-## Branch relationship
-
-Branch **`share/tiago-demo`** is an orphan history containing only the paths above plus this README. Development continues on **`tiago-hil-direct-v0`** (and related branches) in the full repository.
+Further detail: [extra/isaacsim/COMMANDS.md](extra/isaacsim/COMMANDS.md). Nav2 / ROS 2: [ros2_ws/README.md](ros2_ws/README.md).

@@ -1,0 +1,37 @@
+amcl:
+  ros__parameters:
+    use_sim_time: true
+    alpha1: 0.2
+    alpha2: 0.2
+    alpha3: 0.2
+    alpha4: 0.2
+    alpha5: 0.2
+    base_frame_id: base_link
+    odom_frame_id: odom
+    global_frame_id: map
+    tf_broadcast: true
+    scan_topic: /tiago/scan_front_raw
+    min_particles: 500
+    max_particles: 2000
+    resample_interval: 1
+    transform_tolerance: 0.5
+    robot_model_type: "nav2_amcl::OmniMotionModel"
+    set_initial_pose: true
+    initial_pose:
+      x: -0.84791
+      y: -0.79706
+      z: 0.0
+      yaw: 3.141592653589793
+
+map_server:
+  ros__parameters:
+    use_sim_time: true
+    yaml_filename: ""
+
+lifecycle_manager_localization:
+  ros__parameters:
+    use_sim_time: true
+    autostart: true
+    node_names:
+      - map_server
+      - amcl

@@ -1,0 +1,41 @@
+trajectory_execution:
+  allowed_execution_duration_scaling: 1.2
+  allowed_goal_duration_margin: 0.5
+  allowed_start_tolerance: 0.15
+  trajectory_duration_monitoring: true
+
+moveit_controller_manager: moveit_simple_controller_manager/MoveItSimpleControllerManager
+
+moveit_simple_controller_manager:
+  controller_names:
+    - arm_left_controller
+    - arm_right_controller
+
+  arm_left_controller:
+    # Absolute: MoveItPy node is /tiago/tiago_moveit_py; bridge serves under /tiago/ (requires patched getActionName for leading /).
+    action_ns: /tiago/arm_left_controller/follow_joint_trajectory
+    type: FollowJointTrajectory
+    default: true
+    joints:
+      - torso_lift_joint
+      - arm_left_1_joint
+      - arm_left_2_joint
+      - arm_left_3_joint
+      - arm_left_4_joint
+      - arm_left_5_joint
+      - arm_left_6_joint
+      - arm_left_7_joint
+
+  arm_right_controller:
+    action_ns: /tiago/arm_right_controller/follow_joint_trajectory
+    type: FollowJointTrajectory
+    default: false
+    joints:
+      - torso_lift_joint
+      - arm_right_1_joint
+      - arm_right_2_joint
+      - arm_right_3_joint
+      - arm_right_4_joint
+      - arm_right_5_joint
+      - arm_right_6_joint
+      - arm_right_7_joint
