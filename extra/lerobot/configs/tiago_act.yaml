@@ -1,0 +1,58 @@
+# TIAGo ACT (85-DoF state/action), LeRobot layout
+
+# Dataset
+dataset:
+  repo_id: local/tiago_teleop
+  # run_training.sh overrides via --dataset.root
+  root: ./data/tiago_lerobot_dataset
+  video_backend: pyav
+
+# Training settings
+steps: 80000
+num_workers: 4
+batch_size: 8
+eval_freq: 10000
+save_freq: 10000
+save_checkpoint: true
+log_freq: 100
+
+# Policy Definition
+policy:
+  type: act
+  push_to_hub: false
+  
+  # Number of steps to predict into the future
+  n_action_steps: 100
+  chunk_size: 100
+  
+  # Features mapping
+  input_features:
+    observation.images.gemini2:
+      type: VISUAL
+      shape: [3, 720, 1280]
+    observation.state:
+      type: STATE
+      shape: [85]
+      
+  output_features:
+    action:
+      type: ACTION
+      shape: [85]
+
+  # Model architecture (standard ACT defaults)
+  dim_model: 512
+  n_heads: 8
+  dim_feedforward: 3200
+  feedforward_activation: relu
+  n_encoder_layers: 4
+  n_decoder_layers: 7
+  
+  # Vision Backbone
+  vision_backbone: resnet18
+  pretrained_backbone_weights: ResNet18_Weights.IMAGENET1K_V1
+
+  # Optimization
+  optimizer_lr: 1e-5
+  optimizer_weight_decay: 1e-4
+  optimizer_lr_backbone: 1e-5
+  kl_weight: 10.0

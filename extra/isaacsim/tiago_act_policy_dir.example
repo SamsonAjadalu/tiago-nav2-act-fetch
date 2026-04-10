@@ -1,0 +1,3 @@
+# Optional: copy to .tiago_act_policy_dir — one line, absolute path to LeRobot pretrained_model.
+# Example:
+# /path/to/tiago_act_policy/checkpoints/last/pretrained_model
