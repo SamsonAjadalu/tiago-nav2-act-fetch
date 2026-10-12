@@ -2,6 +2,12 @@
 
 This repository implements a long-horizon mobile manipulation workflow for the PAL Robotics TIAGo in NVIDIA Isaac Sim. ROS 2 Nav2 handles room-scale navigation, while LeRobot ACT provides visuomotor control for local approach and grasping.
 
+## Demo
+
+[![TIAGo Mobile Manipulation Demo](https://samsonajadalu.com/projects/long-horizon-mobile-manipulation-in-isaac-sim/cover.jpg)](https://samsonajadalu.com/projects/long-horizon-mobile-manipulation-in-isaac-sim/)
+
+**[Click here to watch the demo](https://samsonajadalu.com/projects/long-horizon-mobile-manipulation-in-isaac-sim/)**
+
 ## License
 
 This software is licensed under the **GNU Affero General Public License v3.0**. See [LICENSE](LICENSE).
